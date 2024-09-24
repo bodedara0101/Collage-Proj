@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const SingleUser = ({ index, email }) => {
+const SingleUser = ({ index, email , name }) => {
 
   const deleteuser =async(email)=>{
     const response = await fetch("http://localhost:5000/deleteusers",{
@@ -22,6 +22,7 @@ const SingleUser = ({ index, email }) => {
     <>
       <tr className="odd:bg-white even:bg-gray-50 border-b border-gray-200">
         <td className="px-6 py-4 font-medium text-gray-900 ">{index}</td>
+        <td className="px-6 py-4">{name}</td>
         <td className="px-6 py-4">{email}</td>
         <td className="px-6 py-4">
           <button onClick={(e)=>{

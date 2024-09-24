@@ -6,6 +6,7 @@ const Singup = () => {
   const navigate = useNavigate();
 
   const [newUser, setNewUser] = useState({
+    userName: "",
     email: "",
     password: "",
     cpassword: "",
@@ -30,7 +31,7 @@ const Singup = () => {
           if(result.message === "signup successfully"){
             navigate('/login')
             console.log(result)
-            toast.success(`${result.message} as ${result.email}`)
+            toast.success(`${result.message} as ${result.userName}`)
           }else{
             toast.warn(`${result.message} as ${result.email}`)
           }
@@ -462,10 +463,29 @@ const Singup = () => {
                   >
                     <div>
                       <label
+                        htmlFor="name"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                      >
+                        Username
+                      </label>
+                      <input
+                        type="text"
+                        name="userName"
+                        onChange={(e) => {
+                          newUser.userName = e.target.value;
+                        }}
+                        id="name"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        placeholder="username"
+                        required={true}
+                      />
+                    </div>
+                    <div>
+                      <label
                         htmlFor="email"
                         className="block mb-2 text-sm font-medium text-gray-900"
                       >
-                        Your email
+                        Email
                       </label>
                       <input
                         type="email"

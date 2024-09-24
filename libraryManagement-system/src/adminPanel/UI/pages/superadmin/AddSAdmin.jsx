@@ -19,10 +19,15 @@ const AddSAdmin = () => {
       })
 
       if(response.ok){
-
         const data = await response.json();
-
-        console.log(data)
+        if(data.message === "User updated in admin")
+        {
+          toast.success(`${data.email} is ${data.message}`)
+          console.log(data)
+        }else{
+          toast.warn(`${data.email} ${data.message}`)
+          console.log(data)
+        }
       }
     }
     else{

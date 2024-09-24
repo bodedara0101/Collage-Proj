@@ -1,30 +1,34 @@
+import { useEffect, useState } from "react";
 import Header from "../../commonComponents/Header";
 import SingleSAdmin from "./SingleSAdmin";
 const SuperAdmins = () => {
-  const sAdminData = [
-    {
-      ID: "3044",
-      password: "ramesh@12334",
-    },
-    {
-      ID: "3045",
-      password: "mukesh@12334",
-    },
-    {
-      ID: "3405",
-      password: "akhil@12334",
-    },
-  ];
+
+  const [superAdmins, setSuperAdmins] = useState([]);
+
+  const getSuperAdmins = async () => {
+    const response = await fetch("http://localhost:5000/getusers");
+    const users = await response.json();
+    console.log(users.users);
+    setSuperAdmins(users.users);
+  };
+
+  useEffect(() => {
+    getSuperAdmins();
+
+    const intervalId = setInterval(getSuperAdmins, 3000); // Fetch every 10 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <>
       <div className=" sm:flex bg-slate-300 ">
       <div className="header md:w-[20%] sm:w-[25%] w-full"><Header /></div>
-        <div className=" w-full ">
-          <h1 className="text-[2rem] font-semibold text-center mt-20">
+        <div className=" md:w-[80%] sm:w-[70%] mx-auto">
+          <h1 className="text-[2rem] font-semibold text-center mt-10 mb-5">
             SuperAdmins
           </h1>
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-5">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 border rounded">
             <table className="w-full text-sm text-left text-gray-700">
               <thead className="text-xs text-gray-700 uppercase bg-gray-100">
                 <tr>
@@ -35,7 +39,7 @@ const SuperAdmins = () => {
                     ID
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Password
+                    Name
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Action
@@ -43,12 +47,12 @@ const SuperAdmins = () => {
                 </tr>
               </thead>
               <tbody>
-                {sAdminData.map((obj, index) => (
+                {superAdmins.map((obj, index) => (
                   <SingleSAdmin
                     key={index}
                     index={index}
-                    id={obj.ID}
-                    password={obj.password}
+                    id={obj._id}
+                    name={obj.userName}
                   />
                 ))}
               </tbody>

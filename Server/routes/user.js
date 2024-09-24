@@ -6,24 +6,26 @@ const {setUser} = require('../service/auth')
 const bcrypt = require('bcrypt')
 
 router.post("/signup", async (req, res) => {
-  const { email, password } = req.body;
-
-    const user = await User.findOne({email});
+  const { userName , email, password } = req.body;
+    const user = await User.findOne({
+      $or: [
+        { email: email }, 
+        { userName: userName }
+      ]
+    });
 
     try {
       if(!(user === null)){
         const message = "User already exist please login"
-        console.log(message);
         return res.json({message,email});
       }
       else{ 
           const message = "signup successfully"
-          console.log(message)
-          const newUser = new User({ email, password });
+          const newUser = new User({ userName ,email, password });
 
           const storeUser = await newUser.save();
           console.log(storeUser)
-          return res.json({message,email}).status(200)
+          return res.json({message,userName}).status(200)
       }
     } catch (error) {
       console.log(error)
@@ -31,18 +33,21 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    const { userName , email , password } = req.body;
   
-      const user = await User.findOne({email});
-  
+      const user = await User.findOne({
+        $or: [
+          { email: email }, 
+          { userName: userName }
+        ]
+      });
       if(!(user === null)){
 
         const isMatch = await bcrypt.compare(password,user.password)
-          if(user.email === email && isMatch)
+          if(user.email === email || user.userName === userName && isMatch)
           {
               const sessionId = uuidv4();
               setUser(sessionId,user)
-              console.log(email);
               const message = "Login success"
               return res.json({message,email}).status(200)
           }
@@ -53,7 +58,6 @@ router.post("/login", async (req, res) => {
       }
       else{
           const message = "User not Found"
-          console.log(message)
           return res.json({message,email})
       }
   });
@@ -62,8 +66,9 @@ router.get("/getusers", async (req, res) => {
 
      try {
       const users = await User.find({isAdmin : "true"});
-      res.json(users)
-  
+      const Nausers = await User.find({isAdmin : "false"});
+      console.log("users are",Nausers)
+      res.json({users,Nausers})
     } catch (error) {
       console.log(error)
      }
@@ -74,9 +79,36 @@ router.post("/getusers", async (req, res) => {
     const {email,password} = req.body;
 
      try {
-
       const users = await User.find({isAdmin : "true"});
-      res.json(users)
+      res.json(users)      
+    } catch (error) {
+      console.log(error)
+     }
+  });
+
+router.post("/getdemousers", async (req, res) => {
+
+    const {email} = req.body;
+    console.log(req.body)
+
+     try {
+      const user = await User.findOne({email});
+      console.log(user)
+      if(user){
+        const isMatch = await User.deleteOne({email});
+        if(isMatch){
+          const users = await User.find();
+          const message = "deleted successfully";
+          res.json({message,users})
+        }
+        else{
+          const message = "Delete fails"
+          res.json({message,email})
+        }
+      }else{
+        const message = "User not Matched";
+        res.json({message,email})
+      }
   
     } catch (error) {
       console.log(error)
@@ -108,7 +140,7 @@ router.post("/addAdmin", async (req, res) => {
           const message = "This user already Admin"
           res.json({message,email}) 
         }else{
-          await User.updateOne({email,password}, {$set : {isAdmin : true}});
+          await User.updateOne({email}, {$set : {isAdmin : true}});
 
           const message = "User updated in admin"
           res.json({message,email})

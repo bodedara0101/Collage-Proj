@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 const Login = () => {
 
   const navigate = useNavigate();
 
   const [userIn, setUserIn] = useState({
+    userName : '',
     email : '',
     password : ''
   })
@@ -455,10 +455,11 @@ const Login = () => {
                         Your email
                       </label>
                       <input
-                        type="email"
+                        type="text"
                         name="email"
                         onChange={(e)=>{
                           userIn.email = e.target.value
+                          userIn.userName = e.target.value
                         }}
                         id="email"
                         className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
@@ -516,7 +517,7 @@ const Login = () => {
           </section>
         </div>
       </div>
-    </>
+    </> 
   );
 };
 export default Login;

@@ -9,8 +9,8 @@ const Users = () => {
   const getUsers = async () => {
     const response = await fetch("http://localhost:5000/getusers");
     const users = await response.json();
-    console.log(users);
-    setUsers(users);
+    console.log(users.Nausers);
+    setUsers(users.Nausers);
   }
 
   useEffect(() => {
@@ -37,6 +37,9 @@ const isAdmin = queryparams.get('admin');
                   #
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Email
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -49,6 +52,7 @@ const isAdmin = queryparams.get('admin');
                 <SingleUser
                   key={index}
                   index={index}
+                  name={obj.userName}
                   email={obj.email}
                 />
               ))}

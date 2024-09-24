@@ -17,7 +17,6 @@ message.post("/contact",async(req,res)=>{
 message.get('/contact',async(req,res)=>{
 
     const messages = await Message.find();
-    console.log(messages)
     res.json(messages).status(200)
 })
 

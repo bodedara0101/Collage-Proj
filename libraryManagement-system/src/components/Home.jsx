@@ -6,11 +6,13 @@ import Slides from "./miniComponents/slides/Slides";
 import AllProduct from "./miniComponents/allProducts/AllProducts";
 import MapForm from "./miniComponents/mapForm/MapForm";
 import Footer from "../adminPanel/UI/commonComponents/Footer";
+import Demo from "./miniComponents/Demo/Demo";
 function Home() {
   return (
     <>
       <Header />
       <HeroSeaction />
+      <Demo />
       <PopulorSales />
       <Highlight />
       <AllProduct />

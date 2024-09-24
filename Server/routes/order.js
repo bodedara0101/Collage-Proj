@@ -29,7 +29,6 @@ order.get("/getorder",async(req,res)=>{
     try {
 
         const allOrders = await Order.find();
-        console.log(allOrders)
         res.json(allOrders)
         if(allOrders){
             return res.json(allOrders).status(200)
