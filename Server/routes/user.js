@@ -82,7 +82,7 @@ router.post("/deleteusers", async (req, res) => {
   });
 
 router.post("/addAdmin", async (req, res) => {
-
+console.log("k")
     const {email,password} = req.body;
 
     console.log(req.body)
