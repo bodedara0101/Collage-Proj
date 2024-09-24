@@ -3,10 +3,26 @@ import { NavLink } from "react-router-dom";
 
 const AdminLogin = () => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [users, setUsers] = useState([]);
 
   console.log(isAdmin)
   const handleCheckboxChange = () => {
     setIsAdmin(!isAdmin); // Toggle checkbox state
+
+
+    const getUsers = async () => {
+      const response = await fetch("http://localhost:5000/getusers");
+      const users = await response.json();
+      console.log(users);
+      setUsers(users);
+    }
+  
+    useEffect(() => {
+      getUsers();
+      const intervalId = setInterval(getUsers, 3000); // Fetch every 10 seconds
+  
+      return () => clearInterval(intervalId);
+    }, []);
   };
 
   return (

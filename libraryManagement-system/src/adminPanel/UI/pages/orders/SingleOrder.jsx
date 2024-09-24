@@ -7,11 +7,12 @@ const SingleOrder = ({
   method,
   mail,
   city,
-  through,
   contact,
   items,
   status,
 }) => {
+
+  console.log(address)
   return (
     <tr className="odd:bg-white even:bg-gray-50 border-b border-gray-200">
       <td className="px-6 py-4 text-gray-900 font-medium hidden md:table-cell">
@@ -21,7 +22,6 @@ const SingleOrder = ({
         {name}
       </td>
       <td className="px-6 py-4 hidden md:table-cell">{mail}</td>
-      <td className="px-6 py-4 hidden md:table-cell">{through}</td>
       <td className="px-6 py-4 hidden md:table-cell">{city}</td>
       <td className="px-6 py-4 hidden md:table-cell">{address}</td>
       <td className="px-6 py-4 hidden md:table-cell">{contact}</td>
@@ -49,9 +49,6 @@ const SingleOrder = ({
         </div>
         <div className="block text-sm text-gray-700">
           <div className="font-semibold">Email:</div> {mail}
-        </div>
-        <div className="block text-sm text-gray-700">
-          <div className="font-semibold">Through:</div> {through}
         </div>
         <div className="block text-sm text-gray-700">
           <div className="font-semibold">City:</div> {city}

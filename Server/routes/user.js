@@ -61,7 +61,21 @@ router.post("/login", async (req, res) => {
 router.get("/getusers", async (req, res) => {
 
      try {
-      const users = await User.find();
+      const users = await User.find({isAdmin : "true"});
+      res.json(users)
+  
+    } catch (error) {
+      console.log(error)
+     }
+  });
+
+router.post("/getusers", async (req, res) => {
+
+    const {email,password} = req.body;
+
+     try {
+
+      const users = await User.find({isAdmin : "true"});
       res.json(users)
   
     } catch (error) {
@@ -82,7 +96,6 @@ router.post("/deleteusers", async (req, res) => {
   });
 
 router.post("/addAdmin", async (req, res) => {
-console.log("k")
     const {email,password} = req.body;
 
     console.log(req.body)

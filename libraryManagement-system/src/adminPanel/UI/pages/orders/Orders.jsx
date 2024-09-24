@@ -1,52 +1,26 @@
+import { useEffect, useState } from "react";
 import Header from "../../commonComponents/Header";
 import SingleOrder from "./SingleOrder";
 
 const Orders = () => {
-  const orderData = [
-    {
-      id: 1,
-      name: "John Doe",
-      mail: "john@example.com",
-      through: "Online",
-      city: "New York",
-      address: "123 Main St",
-      contact: "123-456-7890",
-      date: "2024-09-05",
-      items: "Item1, Item2",
-      amount: "$100",
-      method: "Credit Card",
-      status: "Shipped",
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      mail: "john@example.com",
-      through: "Online",
-      city: "New York",
-      address: "123 Main St",
-      contact: "123-456-7890",
-      date: "2024-09-05",
-      items: "Item1, Item2",
-      amount: "$100",
-      method: "Credit Card",
-      status: "Shipped",
-    },
-    {
-      id: 3,
-      name: "John Doe",
-      mail: "john@example.com",
-      through: "Online",
-      city: "New York",
-      address: "123 Main St",
-      contact: "123-456-7890",
-      date: "2024-09-05",
-      items: "Item1, Item2",
-      amount: "$100",
-      method: "Credit Card",
-      status: "Shipped",
-    },
-    // Add more order orders here
-  ];
+
+  const [Orders, setOrders] = useState([])
+
+  const getorders = async()=>{
+    const result = await fetch("http://localhost:5000/getorder")
+
+    const data = await result.json();
+    setOrders(data)
+    console.log(Orders)
+    console.log(data)
+}
+
+useEffect(() => {
+  getorders();
+  const intervalId = setInterval(getorders, 3000); // Fetch every 10 seconds
+
+    return () => clearInterval(intervalId);
+}, [])
 
   return (
     <>
@@ -68,9 +42,6 @@ const Orders = () => {
                   </th>
                   <th scope="col" className="px-6 py-3 hidden md:table-cell">
                     Email
-                  </th>
-                  <th scope="col" className="px-6 py-3 hidden md:table-cell">
-                    Through
                   </th>
                   <th scope="col" className="px-6 py-3 hidden md:table-cell">
                     City
@@ -99,21 +70,20 @@ const Orders = () => {
                 </tr>
               </thead>
               <tbody>
-                {orderData.length > 0 ? (
-                  orderData.map((order) => (
+                {Orders.length > 0 ? (
+                  Orders.map((order) => (
                     <SingleOrder
-                      key={order.id}
-                      id={order.id}
-                      name={order.name}
-                      mail={order.mail}
-                      through={order.through}
+                      key={order._id}
+                      id={order._id}
+                      name={order.uname}
+                      mail={order.uemail}
                       city={order.city}
                       address={order.address}
-                      contact={order.contact}
+                      contact={order.number}
                       date={order.date}
                       items={order.items}
-                      amount={order.amount}
-                      method={order.method}
+                      amount={order.totalAmount}
+                      method={order.paymentMethod}
                       status={order.status}
                     />
                   ))

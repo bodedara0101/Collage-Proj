@@ -16,13 +16,26 @@ const Checkout = () => {
   const realPrice = lastPrice + tax - discount;
 
   const [pt, spt] = useState("COD");
-  const [date, sdate] = useState(29 - 2 - 24);
   const [name, sname] = useState();
   const [mail, smail] = useState();
-  const [city, scity] = useState();
-  const [through, sthrough] = useState();
+  const [city, scity] = useState("kota");
+  const [through, sthrough] = useState("Online");
   const [contact, scontact] = useState();
   const [address, saddress] = useState();
+
+  const order = async()=>{
+      const result = await fetch("http://localhost:5000/order",{
+        method : "POST",
+        headers : {
+          "Content-type" : "application/json"
+        },
+        body: JSON.stringify({pt,name,mail,city,through,contact,address,items,realPrice})
+      })
+
+      const data = await result.json();
+
+      console.log(data)
+  }
   return (
     <>
       <Header />
@@ -98,7 +111,11 @@ const Checkout = () => {
         </ol>
 
         <form
-          action="#"
+          onSubmit={(e)=>{
+            e.preventDefault()
+            order();
+
+          }}
           className="mx-auto max-w-screen-xl px-4 2xl:px-0  md:pt-5"
         >
           <div className="mt-4 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
@@ -283,9 +300,7 @@ const Checkout = () => {
                           onChange={(obj) => scontact(obj.target.value)}
                           id="phone-input"
                           className="z-20 block w-full rounded-e-lg border border-s-0 border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:border-s-gray-700  dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500"
-                          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                           placeholder="123-456-7890"
-                          required
                         />
                       </div>
                     </div>
@@ -486,12 +501,9 @@ const Checkout = () => {
               </div>
 
               <div className="space-y-3">
-                <NavLink
-                  to={`/placed/${date}/${pt}/${name}/${address}/${contact}/${realPrice}/${items}`}
-                  className="flex w-full items-center justify-center rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Placed Order
-                </NavLink>
+                <button type="submit" className="w-full">
+               dddd
+                </button>
 
                 <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
                   One or more items in your cart require an account.{" "}

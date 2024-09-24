@@ -2,11 +2,22 @@ const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema(
     {
+        uname : {
+            type : String,
+            required : true
+        },
         uemail : {
             type : String,
             required : true,
         },
-        uname : {
+        reachType : {
+            type : String,
+        },
+        city : {
+            type : String,
+            required : true,
+        },
+        address : {
             type : String,
             required : true
         },
@@ -14,9 +25,22 @@ const orderSchema = mongoose.Schema(
             type : Number,
             required : true
         },
-        orderedBy : {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : 'users'
+        items : {
+            type : Array,
+            required : true,
+        },
+        totalAmount : {
+            type : Number,
+            required : true,
+        },
+        status : {
+            type : String,
+            required : true,
+            default : "shiped"
+        },
+        paymentMethod : {
+            type : String,
+            required : true,
         },
         date : {
             type : Date,

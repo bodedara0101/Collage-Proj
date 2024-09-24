@@ -7,6 +7,7 @@ const session = require("express-session");
 const router = require("./routes/user");
 const message = require("./routes/message");
 const product = require("./routes/Products");
+const order = require("./routes/order");
 
 const User = require("./models/User");
 
@@ -41,6 +42,7 @@ app.get("/", (req, res) => {
 app.use("/", router);
 app.use("/", message);
 app.use("/", product);
+app.use("/", order);
 
 app.listen(process.env.PORT, () => {
   console.log(`Backend server is running on ${process.env.PORT}`);
