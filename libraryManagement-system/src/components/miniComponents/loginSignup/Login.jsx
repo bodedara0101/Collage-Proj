@@ -25,7 +25,7 @@ const Login = () => {
       const json = await sendUserInfo.json();
 
       if(json.message === "Login success"){
-        navigate('/dashboard');
+        navigate('/');
         toast.success(`${json.message} as ${json.email}`)
         console.log(status,json)
       }
