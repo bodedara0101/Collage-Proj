@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ShowBook from "../miniComponents/populorSales/ShowBook";
 import { productData } from "../miniComponents/allProducts/allproductdata";
+import Profile from "../miniComponents/loginSignup/userContext/Profile";
 
 const Header = () => {
   const [hideBar, sHideBar] = useState(false); // For Hamburger Menu
@@ -210,6 +211,7 @@ const Header = () => {
                 ></path>
               </svg>
             </NavLink>
+            <Profile />
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const Demo = () => {
 
   return (
     <>
-      <div className="demo w-screen bg-slate-800">
+      <div className="demo w-full bg-slate-800">
         <form className="w-[80%] mx-auto h-52 flex justify-center align-middle gap-3" onSubmit={(e)=>{
           e.preventDefault()
           getUsers();

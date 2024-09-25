@@ -16,14 +16,16 @@ const HeroSection = () => {
               </h5>
 
               <div className="flex gap-2 sm:gap-5 justify-center">
+                {/* {typeof localStorage.getItem("Profile") == Object?
+                null:
                 <NavLink
-                  to="/login"
-                  className="relative inline-flex items-center justify-center p-0.5 mb-2  overflow-hidden text-xs sm:text-sm md:text-base lg:text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-700 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-                >
-                  <span className="relative px-4 py-2 text-xs sm:text-sm md:text-base lg:text-base transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    LOGIN
-                  </span>
-                </NavLink>
+                to="/login"
+                className="relative inline-flex items-center justify-center p-0.5 mb-2  overflow-hidden text-xs sm:text-sm md:text-base lg:text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-700 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+              >
+                <span className="relative px-4 py-2 text-xs sm:text-sm md:text-base lg:text-base transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  LOGIN
+                </span>
+              </NavLink>} */}
                 <NavLink
                   to="/signup"
                   className="relative inline-flex items-center justify-center p-0.5 mb-2  overflow-hidden text-xs sm:text-sm md:text-base lg:text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-700 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"

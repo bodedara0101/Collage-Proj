@@ -44,21 +44,26 @@ router.post("/login", async (req, res) => {
       if(!(user === null)){
 
         const isMatch = await bcrypt.compare(password,user.password)
-          if(user.email === email || user.userName === userName && isMatch)
+          if(isMatch && !user.isAdmin)
           {
               const sessionId = uuidv4();
               setUser(sessionId,user)
               const message = "Login success"
-              return res.json({message,email}).status(200)
+              return res.json({message,user}).status(200)
           }
           else{
+            if(user.isAdmin){
+              const message = "User not Found"
+              return res.json({message,email})
+            }
               const message = "Incorrect username or password"
-              return res.json({message}).status(200)
+              return res.json({message,user}).status(200)
           }
+
       }
       else{
-          const message = "User not Found"
-          return res.json({message,email})
+        const message = "User not Found"
+        return res.json({message,email})
       }
   });
 

@@ -1,9 +1,13 @@
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UserContext } from './userContext/UserContext';
+
 const Login = () => {
 
   const navigate = useNavigate();
+
+  const {user , setUser} = useContext(UserContext)
 
   const [userIn, setUserIn] = useState({
     userName : '',
@@ -26,8 +30,10 @@ const Login = () => {
 
       if(json.message === "Login success"){
         navigate('/');
-        toast.success(`${json.message} as ${json.email}`)
+        toast.success(`${json.message} as ${json.user.email}`)
         console.log(status,json)
+        setUser(json.user)
+        localStorage.setItem("Profile",JSON.stringify(json.user))
       }
       else{
         toast.warn(`${json.message}`)

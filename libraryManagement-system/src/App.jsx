@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import React, { useContext } from 'react';
-import { UserContext } from "./components/miniComponents/loginSignup/userContext/UserContext";
-import { UserProvider } from "./components/miniComponents/loginSignup/userContext/UserContext";
+import UserProvider from './components/miniComponents/loginSignup/userContext/UserProvider';
 
 import Home from "./components/Home";
 import SingleBook from "./components/miniComponents/SingleBook";
@@ -30,10 +29,12 @@ import Projects from './components/miniComponents/projects/Home';
 import Todolist from './components/miniComponents/projects/Todolist';
 import Message from './adminPanel/UI/pages/inbox/Message';
 import MyProduct from "./adminPanel/UI/pages/superadmin/MyProducts";
+
 function App() {
-  const {user} = useContext()
+
   return (
     <>
+    <UserProvider>
       <Router>
         <ToastContainer />
         <Routes>
@@ -68,6 +69,7 @@ function App() {
           <Route path="/addsuperadmin" element={<AddSAdmin />} />
         </Routes>
       </Router>
+      </UserProvider>
     </>
   );
 }
