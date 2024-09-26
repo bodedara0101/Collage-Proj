@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AddProduct } from "../../store/slices/Slice";
 import { useSelector } from "react-redux";
 import { PlusPrice } from "../../store/slices/Slice";
+import { toast } from "react-toastify";
 const SingleBook = () => {
   const loc = useLocation();
   const dis = useDispatch();
@@ -15,6 +16,7 @@ const SingleBook = () => {
   const handleAddToCart = () => {
     if (isProductInCart) {
       console.log("Product already in cart:", loc.state.name);
+      toast.info("Product already in cart:", loc.state.name);
     } else {
       dis(
         AddProduct({
@@ -24,6 +26,7 @@ const SingleBook = () => {
         })
       );
       dis(PlusPrice({ price: loc.state.price }));
+      toast.success(`${loc.state.name} Iteam Added in cart`)
     }
   };
   return (
@@ -50,7 +53,7 @@ const SingleBook = () => {
                 By {loc.state.author} | {loc.state.year}
               </p>
               <p className=" font-normal py-1 text-[0.7rem] sm:text-[0.9rem] text-[#9193a4] px-4 pt-3">
-                #{loc.state.catagory} #books
+                #{loc.state.catagory}
               </p>
               <div className="flex items-center space-x-1 rtl:space-x-reverse px-4 pt-3">
                 <svg
@@ -130,17 +133,10 @@ const SingleBook = () => {
                 About The Author
               </h1>
               <h1 className="text-[0.8rem] font-semibold text-slate-200 pt-5 pb-2">
-                - Kim Jong
+                - {loc.state.author}
               </h1>
               <p className=" font-normal text-[0.8rem] text-[#9193a4]">
-                Here are the biggest enterprise technology acquisitions of 2021
-                so far, in reverse chronological order.biggest enterprise
-                technology acquisitions of 2021 so far, in reverse
-                chronologicalrse chrHere are the biggest enterprise technology
-                acquisitions of 2021 so far, in reverse chronological
-                order.biggest enterprise technology acquisitions of 2021 so far,
-                in reverse chronologicalrse chrHere are the biggest enterprise
-                technology acquisitions of 2021 so far,
+              {loc.state.desc}
               </p>
             </div>
             <div className=" font-normal text-[0.8rem] text-[#9193a4] w-full md:w-[50%] p-4">

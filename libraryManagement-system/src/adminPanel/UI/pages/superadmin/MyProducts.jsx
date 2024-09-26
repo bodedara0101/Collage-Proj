@@ -25,9 +25,9 @@ const MyProduct = () => {
 
   return (
     <>
-    <div className="myproducts sm:flex  justify-between bg-slate-400 h-auto w-full">
-    <div className="header xl:w-[15%] lg:w-[20%] md:w-[22%] sm:w-[28%] w-full"><Header /></div>
-      <section className="antialiased  md:pb-20  pb-10 sm:w-[85%] mx-auto w-full">
+    <div className="myproducts sm:flex  justify-between bg-slate-400 h-screen w-full">
+    <div className="header xl:w-[15%] lg:w-[20%] md:w-[22%] sm:w-[28%] w-full sm:h-full h-[10%]"><Header /></div>
+      <section className="antialiased  md:pb-20  pb-10 sm:w-[85%] mx-auto w-full sm:h-full h-[90%] overflow-y-auto">
         <h1 className="text-center text-4xl font-bold sm:mt-10 mt-5">My Products {Products.length}</h1>
         <div className="  justify-between space-t-4 sm:flex sm:space-y-0 items-center pb-2 sm:pb-5 px-2 sm:px-4">
 
@@ -173,25 +173,25 @@ const MyProduct = () => {
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           <div className="mb-4 grid gap-4 sm:grid-cols-1 md:mb-8 lg:grid-cols-2 md:grid-cols-1 xl:grid-cols-2 ">
             {Products.map((obj, index) =>
-              (catagory === obj.catagory) | (catagory == "all") ? (
+              (catagory === obj.category) | (catagory == "all") ? (
                 <SingleProduct
                   key={index}
                   name={obj.name}
                   image={obj.image}
                   oPrice={obj.oPrice}
-                  author={obj.author}
+                  auther={obj.auther}
                   year={obj.year}
                   discount={obj.discount}
                   rating={obj.rating}
                   price={obj.price}
-                  catagory={obj.catagory}
+                  catagory={obj.category}
                   desc={obj.desc}
                 />
               ) : null
             )}
             {shall
               ? Products.map((obj, index) =>
-                  (catagory === obj.catagory) | (catagory == "all") ? (
+                  (catagory === obj.category) | (catagory == "all") ? (
                     <SingleProduct
                       key={index}
                       name={obj.name}
@@ -202,7 +202,7 @@ const MyProduct = () => {
                       discount={obj.discount}
                       rating={obj.rating}
                       price={obj.price}
-                      catagory={obj.catagory}
+                      catagory={obj.category}
                       desc={obj.desc}
                     />
                   ) : null

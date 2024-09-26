@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SingleProduct from "./SingleProduct";
-import { productData, productData2 } from "./allproductdata";
+
 const AllProducts = () => {
   const [shall, sshall] = useState(false);
   const [filter, sfilter] = useState(false);
@@ -172,36 +172,36 @@ const AllProducts = () => {
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
             {Products.map((obj, index) =>
-              (catagory === obj.catagory) | (catagory == "all") ? (
+              (catagory === obj.category) | (catagory == "all") ? (
                 <SingleProduct
                   key={index}
                   name={obj.name}
                   image={obj.image}
                   oPrice={obj.oPrice}
-                  author={obj.author}
+                  author={obj.auther}
                   year={obj.year}
                   discount={obj.discount}
                   rating={obj.rating}
                   price={obj.price}
-                  catagory={obj.catagory}
+                  catagory={obj.category}
                   desc={obj.desc}
                 />
               ) : null
             )}
             {shall
               ? Products.map((obj, index) =>
-                  (catagory === obj.catagory) | (catagory == "all") ? (
+                  (catagory === obj.category) | (catagory == "all") ? (
                     <SingleProduct
                       key={index}
                       name={obj.name}
                       image={obj.image}
                       oPrice={obj.oPrice}
-                      author={obj.author}
+                      author={obj.auther}
                       year={obj.year}
                       discount={obj.discount}
                       rating={obj.rating}
                       price={obj.price}
-                      catagory={obj.catagory}
+                      catagory={obj.category}
                       desc={obj.desc}
                     />
                   ) : null

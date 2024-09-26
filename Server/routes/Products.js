@@ -4,7 +4,7 @@ const Product = require("../models/Product");
 const product = express.Router();
 
 product.post("/PopularSales", async (req, res) => {
-  const { name, image, auther, desc, oPrice, price } = req.body;
+  const { name, image, auther, desc, oPrice, price, category } = req.body;
   console.log(req.body);
   try {
     const newPopularSales = new PopularSales({
@@ -14,9 +14,10 @@ product.post("/PopularSales", async (req, res) => {
       desc,
       oPrice,
       price,
+      category
     });
     await newPopularSales.save();
-    return res.json({ name, image, auther, desc, oPrice, price }).status(200);
+    return res.json({ name, image, auther, desc, oPrice, price,category }).status(200);
   } catch (error) {
     console.log(error);
   }

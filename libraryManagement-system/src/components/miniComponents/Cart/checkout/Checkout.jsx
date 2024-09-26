@@ -33,7 +33,7 @@ const Checkout = () => {
       })
 
       const data = await result.json();
-
+      
       console.log(data)
   }
   return (
@@ -501,8 +501,8 @@ const Checkout = () => {
               </div>
 
               <div className="space-y-3">
-                <button type="submit" className="w-full">
-               dddd
+                <button type="submit" className="w-full bg-violet-600 rounded-lg p-2 text-2xl font-semibold">
+                    Place
                 </button>
 
                 <p className="text-sm font-normal text-gray-500 dark:text-gray-400">

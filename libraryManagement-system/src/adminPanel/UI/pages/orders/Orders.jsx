@@ -5,13 +5,13 @@ import SingleOrder from "./SingleOrder";
 const Orders = () => {
 
   const [Orders, setOrders] = useState([])
+  const [search, setSearch] = useState('')
 
   const getorders = async()=>{
     const result = await fetch("http://localhost:5000/getorder")
 
     const data = await result.json();
     setOrders(data)
-    console.log(Orders)
     console.log(data)
 }
 
@@ -24,15 +24,22 @@ useEffect(() => {
 
   return (
     <>
-      <div className="sm:flex bg-slate-300 w-screen">
-        <div className="header lg:w-[20%] sm:w-[25%] w-full"><Header /></div>
-        <div className="lg:w-[80%] sm:w-[75%] w-full">
-          <h1 className="text-[2rem] font-semibold text-center mt-10">
+      <div className="sm:flex bg-slate-300 w-full h-screen">
+        <div className="header lg:w-[20%] sm:w-[25%] w-full sm:h-full h-[10%]"><Header /></div>
+        <div className="lg:w-[80%] sm:w-[75%] w-full sm:h-full h-[85%]">
+          <h1 className="text-[2rem] font-semibold text-center my-5">
             Orders
           </h1>
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-[90%] mx-auto">
+          <div className="search w-full mx-auto">
+            <form className="w-[50%] mx-auto">
+              <input type="text" placeholder="Search" className="w-full mx-auto p-2 rounded-lg mb-5" onChange={(e) =>{
+                setSearch(e.target.value)
+              }}/>
+            </form>
+          </div>
+          <div className="relative overflow-x-auto overflow-y-auto shadow-md sm:rounded-lg w-[90%] max-h-[75%] mx-auto">
             <table className="w-full text-sm text-left text-gray-700">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-100">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 hidden md:table-cell">
                     Order Id
@@ -72,6 +79,7 @@ useEffect(() => {
               <tbody>
                 {Orders.length > 0 ? (
                   Orders.map((order) => (
+                    (order.uname.includes(search))?(
                     <SingleOrder
                       key={order._id}
                       id={order._id}
@@ -80,13 +88,13 @@ useEffect(() => {
                       city={order.city}
                       address={order.address}
                       contact={order.number}
-                      date={order.date}
+                      date={new Date(order.date).toLocaleString('en-IN',{timeZone : 'Asia/Kolkata'})}
                       items={order.items}
                       amount={order.totalAmount}
                       method={order.paymentMethod}
                       status={order.status}
                     />
-                  ))
+                  ):null))
                 ) : (
                   <tr>
                     <td colSpan="12" className="px-6 py-3 text-center">

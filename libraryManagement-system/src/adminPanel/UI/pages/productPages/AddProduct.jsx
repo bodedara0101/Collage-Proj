@@ -11,7 +11,7 @@ const AddProduct = () => {
     desc : "",
     oPrice : "",
     price : "" ,
-    category : "all" 
+    category : " " 
   })
 
   const err = document.getElementById("error");
@@ -136,13 +136,12 @@ const AddProduct = () => {
             <select
                 onChange={handleselect}
                 type="text"
-                value={Product.category}
                 name="category"
                 className="block py-2.5 px-0 w-full text-sm    bg-transparent border-0 border-b-2 border-gray-300 appearance-none text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 required={true}
               >
-              <option value="all" defaultValue={true}>all</option>
+              <option value="all">All</option>
               <option value="science fiction">science fiction</option>
               <option value="thriller">thriller</option>
               <option value="adventures">adventures</option>
@@ -151,8 +150,8 @@ const AddProduct = () => {
               <option value="horror">horror</option>
               <option value="romance">romance</option>
               </select>
-              <label className="peer-focus:font-medium absolute text-sm   text-gray-600 dark:text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                Sell Price
+              <label className="peer-focus:font-medium absolute text-sm text-gray-600 dark:text-gray-600 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Category
               </label>
             </div>
             <div className=" flex">

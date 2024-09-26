@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="w-full flex justify-between items-center bg-black px-5 sm:hidden">
+      <div className="w-full flex justify-between items-center bg-black px-5 sm:hidden h-full">
         <h1 className="text-white ">Admin</h1>
         <div>
           <button

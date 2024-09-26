@@ -24,7 +24,7 @@ router.post("/signup", async (req, res) => {
           const newUser = new User({ userName ,email, password });
 
           const storeUser = await newUser.save();
-          console.log(storeUser)
+          console.log("New user",storeUser)
           return res.json({message,userName}).status(200)
       }
     } catch (error) {
@@ -72,20 +72,37 @@ router.get("/getusers", async (req, res) => {
      try {
       const users = await User.find({isAdmin : "true"});
       const Nausers = await User.find({isAdmin : "false"});
-      console.log("users are",Nausers)
+
       res.json({users,Nausers})
     } catch (error) {
       console.log(error)
      }
   });
 
-router.post("/getusers", async (req, res) => {
+router.post("/adminlogin", async (req, res) => {
 
     const {email,password} = req.body;
 
+    console.log(req.body)
      try {
-      const users = await User.find({isAdmin : "true"});
-      res.json(users)      
+       const admin = await User.findOne({email,isAdmin : true});
+       if(!(admin == null)){
+        const isMatch = await bcrypt.compare(password,admin.password)
+        if(isMatch){
+          const message = "Login successfully"
+          console.log(message)
+          res.status(200).json({message,admin})
+        }else{
+          const message = "Invelid credincials"
+          console.log(message)
+          res.status(401).json({message,email})
+        }      
+      }
+      else{
+        const message = "Admin not exist"
+        console.log(message)
+        res.status(409).json({message,email})
+      }
     } catch (error) {
       console.log(error)
      }
@@ -141,13 +158,19 @@ router.post("/addAdmin", async (req, res) => {
 
       console.log(user)
       if(user){
+        const isMatch = await bcrypt.compare(password,user.password)
+        console.log(isMatch)
         if(user.isAdmin){
           const message = "This user already Admin"
-          res.json({message,email}) 
-        }else{
+          res.json({message,email})
+        }
+        else if(isMatch){
           await User.updateOne({email}, {$set : {isAdmin : true}});
 
           const message = "User updated in admin"
+          res.json({message,email})
+        }else{
+          const message = "Incorrect password"
           res.json({message,email})
         }
       }else{

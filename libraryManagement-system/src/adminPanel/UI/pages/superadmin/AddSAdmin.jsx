@@ -24,8 +24,12 @@ const AddSAdmin = () => {
         {
           toast.success(`${data.email} is ${data.message}`)
           console.log(data)
-        }else{
-          toast.warn(`${data.email} ${data.message}`)
+          setAdminData({email : "",password : ""})
+        }else if(data.message === "Incorrect password"){
+          toast.warn(`${data.message}`)
+        }
+        else{
+          toast.warn(`${adminData.email} ${data.message}`)
           console.log(data)
         }
       }
